@@ -1,7 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/vallezw/RomManager/backend/controllers"
+	"github.com/vallezw/RomManager/backend/models"
+)
 
 func main() {
-	fmt.Println("Hello, world.")
+	r := gin.Default()
+
+	models.ConnectDatabase()
+
+	r.GET("/books", controllers.FindBooks)
+	r.POST("/books", controllers.CreateBook)
+
+	r.Run()
 }
