@@ -1,6 +1,7 @@
 package models
 
 import (
+	"errors"
 	"fmt"
 	"time"
 
@@ -70,4 +71,14 @@ func (u *User) BeforeSave() error {
 	u.Password = string(hashedPassword)
 
 	return nil
+}
+
+func GetUserByID(uid uint) (User, error) {
+	var u User
+
+	if err := DB.First(&u, uid).Error; err != nil {
+		return u, errors.New("user not found")
+	}
+
+	return u, nil
 }
