@@ -66,7 +66,6 @@ func Config() ServerConfig {
 type ServerConfig struct {
 	ApiSecret     string `env:"API_SECRET"`
 	TokenLifespan string `env:"JWT_TOKEN_LIFESPAN"` // Is given in hours
-	Version       int    `env:"VERSION"`
 }
 
 // Bootstrap the applicatoin config struct with the default config
