@@ -6,27 +6,27 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/vallezw/RomManager/backend/models"
+	"github.com/vallezw/RomManager/backend/request_types"
 	"github.com/vallezw/RomManager/backend/utils"
 	"github.com/vallezw/RomManager/backend/utils/token"
 )
 
-type LoginInput struct {
-	Email    string `json:"email" binding:"required"`
-	Password string `json:"password" binding:"required"`
-}
-
 func Login(c *gin.Context) {
-	var input LoginInput
+	var req request_types.LoginRequest
 
-	if err := c.ShouldBindJSON(&input); err != nil {
+	if err := c.ShouldBindJSON(&req); err != nil {
+		utils.DoError(c, http.StatusBadRequest, err)
+		return
+	}
+	if err := req.ValidateForm(); err != nil {
 		utils.DoError(c, http.StatusBadRequest, err)
 		return
 	}
 
 	u := models.User{}
 
-	u.Email = input.Email
-	u.Password = input.Password
+	u.Email = req.Email
+	u.Password = req.Password
 
 	token, err := models.LoginCheck(u.Email, u.Password)
 
@@ -38,29 +38,22 @@ func Login(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"token": token})
 }
 
-type RegisterInput struct {
-	Email    string `json:"email" binding:"required"`
-	Password string `json:"password" binding:"required"`
-}
-
 func Register(c *gin.Context) {
+	var req request_types.RegisterRequest
 
-	var input RegisterInput
-
-	if err := c.ShouldBindJSON(&input); err != nil {
-		utils.DoError(c, http.StatusBadRequest, errors.New("no email or password given"))
+	if err := c.ShouldBindJSON(&req); err != nil {
+		utils.DoError(c, http.StatusBadRequest, err)
 		return
 	}
-
-	if !utils.IsValidMailAddress(input.Email) {
-		utils.DoError(c, http.StatusBadRequest, errors.New("given email is not a proper address"))
+	if err := req.ValidateForm(); err != nil {
+		utils.DoError(c, http.StatusBadRequest, err)
 		return
 	}
 
 	u := models.User{}
 
-	u.Email = input.Email
-	u.Password = input.Password
+	u.Email = req.Email
+	u.Password = req.Password
 
 	u.Prepare()
 
