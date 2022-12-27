@@ -12,9 +12,6 @@ import (
 )
 
 func GenerateToken(user_id uint32) (string, error) {
-
-	fmt.Println(os.Getenv("TOKEN_HOUR_LIFESPAN"))
-
 	token_lifespan, err := strconv.Atoi(os.Getenv("TOKEN_HOUR_LIFESPAN"))
 	if err != nil {
 		return "", err

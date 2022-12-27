@@ -2,7 +2,6 @@ package models
 
 import (
 	"errors"
-	"fmt"
 	"time"
 
 	"github.com/vallezw/RomManager/backend/utils/token"
@@ -44,7 +43,6 @@ func LoginCheck(email string, password string) (string, error) {
 	}
 
 	token, err := token.GenerateToken(u.ID)
-	fmt.Println(err)
 	if err != nil {
 		return "", err
 	}

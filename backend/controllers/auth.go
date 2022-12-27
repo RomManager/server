@@ -52,6 +52,11 @@ func Register(c *gin.Context) {
 		return
 	}
 
+	if !utils.IsValidMailAddress(input.Email) {
+		utils.DoError(c, http.StatusBadRequest, errors.New("given email is not a proper address"))
+		return
+	}
+
 	u := models.User{}
 
 	u.Email = input.Email
