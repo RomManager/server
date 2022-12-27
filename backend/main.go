@@ -1,21 +1,18 @@
 package main
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
+	"github.com/vallezw/RomManager/backend/config"
 	"github.com/vallezw/RomManager/backend/controllers"
 	"github.com/vallezw/RomManager/backend/middlewares"
 	"github.com/vallezw/RomManager/backend/models"
 )
 
 func main() {
-	// Load env file (to be optimized)
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalf("err loading: %v", err)
-	}
+
+	fmt.Printf("Welcome to %v", config.Config().Version)
 
 	r := gin.Default()
 

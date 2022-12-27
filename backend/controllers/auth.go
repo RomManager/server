@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -62,7 +63,13 @@ func Register(c *gin.Context) {
 	createdUser, err := u.SaveUser()
 
 	if err != nil {
+		fmt.Println(err)
+		if err.Error() == "UNIQUE constraint failed: users.email" {
+			utils.DoError(c, http.StatusBadRequest, errors.New("email is already in usage"))
+			return
+		}
 		utils.DoError(c, http.StatusBadRequest, err)
+
 		return
 	}
 
