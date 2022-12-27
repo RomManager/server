@@ -20,8 +20,9 @@ func SetupRouter() {
 
 	protected.GET("/user", CurrentUser)
 
+	runServer(r)
 }
 
-func RunServer(router *gin.Engine) {
+func runServer(router *gin.Engine) {
 	router.Run(":8080")
 }
