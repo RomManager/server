@@ -25,6 +25,7 @@ func main() {
 	protected := r.Group("/api")
 	protected.Use(middlewares.JwtAuthMiddleware())
 
+	public.GET("/", controllers.Home)
 	public.GET("/books", controllers.FindBooks)
 	public.POST("/books", controllers.CreateBook)
 	public.POST("/register", controllers.Register)
