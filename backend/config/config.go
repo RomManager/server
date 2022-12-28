@@ -63,6 +63,7 @@ func Config() ServerConfig {
 	return serverConfig
 }
 
+// TODO: Make datapath pre check so it doesn't have to end with "/"
 type ServerConfig struct {
 	ApiSecret     string `env:"API_SECRET"`
 	TokenLifespan string `env:"JWT_TOKEN_LIFESPAN"` // Is given in hours

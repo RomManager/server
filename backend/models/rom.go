@@ -1,5 +1,7 @@
 package models
 
+import "errors"
+
 type Rom struct {
 	ID       uint32 `gorm:"primary_key;auto_increment" json:"id"`
 	Name     string `json:"name"`
@@ -25,6 +27,16 @@ func GetAllRoms() (*[]Rom, error) {
 	}
 
 	return &roms, err
+}
+
+func GetRomByID(rid uint) (Rom, error) {
+	var r Rom
+
+	if err := DB.First(&r, rid).Error; err != nil {
+		return r, errors.New("rom not found")
+	}
+
+	return r, nil
 }
 
 // Check if rom exists by given filepath -> bool

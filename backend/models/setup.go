@@ -27,5 +27,5 @@ func ConnectDatabase() {
 
 	DB = database
 
-	color.Cyan("Checked for data/database.db file and connected to database\n")
+	color.Cyan("Made sure data/database.db file exists and connected to database\n")
 }

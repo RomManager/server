@@ -24,6 +24,10 @@ func SetupRouter() {
 
 	// Roms
 	public.GET("/roms", GetAllRoms)
+	public.GET("/rom/:id", GetRom)
+
+	// Synchronization
+	public.GET("/sync", Sync)
 
 	runServer(r)
 }

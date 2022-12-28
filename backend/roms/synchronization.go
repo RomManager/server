@@ -18,15 +18,12 @@ func SetupDirectories() {
 	// Run through the emulator list and create a directory for each emulator
 	for _, emulator := range EmulatorList {
 		utils.CreateDirIfNotExists(config.Config().DataPath + emulator.FolderName)
-		color.Cyan("Checked if directory exists: %v \n", emulator.Name)
+		color.Cyan("Made sure directory exists: %v \n", emulator.Name)
 	}
 	color.Blue("All emulator folders are present in data/roms")
-
-	SyncRomFiles()
 }
 
 // TODO: Write method for missing files
-
 func SyncRomFiles() {
 
 	dataPath := config.Config().DataPath
