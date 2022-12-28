@@ -7,6 +7,7 @@ import (
 
 	"github.com/fatih/color"
 	"github.com/vallezw/RomManager/backend/config"
+	"github.com/vallezw/RomManager/backend/models"
 	"github.com/vallezw/RomManager/backend/utils"
 )
 
@@ -17,12 +18,14 @@ func SetupDirectories() {
 	// Run through the emulator list and create a directory for each emulator
 	for _, emulator := range EmulatorList {
 		utils.CreateDirIfNotExists(config.Config().DataPath + emulator.FolderName)
-		color.Cyan("Checked directory for: %v \n", emulator.Name)
+		color.Cyan("Checked if directory exists: %v \n", emulator.Name)
 	}
 	color.Blue("All emulator folders are present in data/roms")
 
 	SyncRomFiles()
 }
+
+// TODO: Write method for missing files
 
 func SyncRomFiles() {
 
@@ -31,24 +34,44 @@ func SyncRomFiles() {
 	if config.Config().DataPath == "data/" {
 		currentDirectory, _ := os.Getwd()
 
-		dataPath = currentDirectory + "data/"
+		dataPath = currentDirectory + "/" + "data/"
 	}
 
 	// Iterate through the each emulator folder
 	for _, emulator := range EmulatorList {
 		emulatorPath := dataPath + emulator.FolderName
-		walkThroughDir(emulatorPath)
+		walkThroughDir(emulatorPath, emulator)
 	}
 }
 
-func walkThroughDir(path string) {
+// TODO: Make log process a bit cleaner
+func walkThroughDir(path string, emulator Emulator) {
 	filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
+		c := color.New(color.FgCyan)
 		if err != nil {
 			fmt.Println(err.Error())
 			return err
 		}
+		// Ignore the directories
+		if info.IsDir() {
+			return nil
+		}
 
-		fmt.Printf("File Name: %s\n", info.Name())
+		c.Printf("Found '%s' --- Checking for DB entry --- ", info.Name())
+
+		// Check if a rom with the filepath already exists
+		if !models.CheckRomExistsByFilepath(path) {
+			rom := models.Rom{
+				Name:     info.Name(), // TODO: Make api call or something to get proper name
+				Filepath: path,
+				Emulator: emulator.FolderName,
+			}
+			rom.SaveRom()
+			c.Printf("Didn't find in DB --- Created a new entry --- Continuing...\n")
+			return nil
+		}
+
+		c.Printf("Found in DB --- Continuing...\n")
 		return nil
 	})
 }

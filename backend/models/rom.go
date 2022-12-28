@@ -3,8 +3,8 @@ package models
 type Rom struct {
 	ID       uint32 `gorm:"primary_key;auto_increment" json:"id"`
 	Name     string `json:"name"`
-	Filepath string `json:"filepath"`
-	Emulator string `json:"emulator"`
+	Filepath string `gorm:"unique" json:"filepath"`
+	Emulator string `json:"emulator"` // Given emulator as emulator ID (Foldername)
 }
 
 func (r *Rom) SaveRom() (*Rom, error) {
@@ -25,4 +25,13 @@ func GetAllRoms() (*[]Rom, error) {
 	}
 
 	return &roms, err
+}
+
+// Check if rom exists by given filepath -> bool
+func CheckRomExistsByFilepath(path string) bool {
+	var roms []Rom
+
+	result := DB.Where(&Rom{Filepath: path}, "filepath").Find(&roms)
+
+	return result.RowsAffected != 0
 }

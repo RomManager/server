@@ -2,7 +2,7 @@ package roms
 
 type Emulator struct {
 	Name       string
-	FolderName string
+	FolderName string // Has to be unique
 }
 
 var EmulatorList []Emulator = []Emulator{
