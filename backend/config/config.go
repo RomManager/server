@@ -66,6 +66,8 @@ func Config() ServerConfig {
 type ServerConfig struct {
 	ApiSecret     string `env:"API_SECRET"`
 	TokenLifespan string `env:"JWT_TOKEN_LIFESPAN"` // Is given in hours
+
+	DataPath string `env:"DATA_PATH"` // Has to end with a "/" for now
 }
 
 // Bootstrap the applicatoin config struct with the default config
@@ -73,5 +75,6 @@ func NewConfig() ServerConfig {
 	return ServerConfig{
 		ApiSecret:     "yourapikey",
 		TokenLifespan: "10",
+		DataPath:      "data/",
 	}
 }

@@ -13,11 +13,17 @@ func SetupRouter() {
 	protected.Use(middlewares.JwtAuthMiddleware())
 
 	public.GET("/", Home)
+
+	// For testing (Should be removed afterwards)
+	public.GET("/run_method", RunMethod)
+
+	// Authentication
 	public.POST("/register", Register)
 	public.POST("/login", Login)
-	public.GET("/roms", GetAllRoms)
-
 	protected.GET("/user", CurrentUser)
+
+	// Roms
+	public.GET("/roms", GetAllRoms)
 
 	runServer(r)
 }

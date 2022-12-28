@@ -1,8 +1,8 @@
 package models
 
 import (
-	"fmt"
-
+	"github.com/fatih/color"
+	"github.com/vallezw/RomManager/backend/config"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -11,7 +11,7 @@ import (
 var DB *gorm.DB
 
 func ConnectDatabase() {
-	database, err := gorm.Open(sqlite.Open("data/database.db"), &gorm.Config{
+	database, err := gorm.Open(sqlite.Open(config.Config().DataPath+"database.db"), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent), // Silence the logger
 	})
 
@@ -27,5 +27,5 @@ func ConnectDatabase() {
 
 	DB = database
 
-	fmt.Println("Connected to database")
+	color.Cyan("Checked for data/database.db file and connected to database\n")
 }

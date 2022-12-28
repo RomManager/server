@@ -58,8 +58,6 @@ func Register(c *gin.Context) {
 
 	u.Prepare()
 
-	u.BeforeSave()
-
 	createdUser, err := u.SaveUser()
 
 	if err != nil {

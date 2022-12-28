@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	fmt.Printf("Welcome to the RomManager Server")
+	fmt.Println("Welcome to the RomManager server")
 
 	// Connect to DB and setup router
 	models.ConnectDatabase()
