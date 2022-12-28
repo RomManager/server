@@ -11,7 +11,7 @@ import (
 var DB *gorm.DB
 
 func ConnectDatabase() {
-	database, err := gorm.Open(sqlite.Open("database.db"), &gorm.Config{
+	database, err := gorm.Open(sqlite.Open("data/database.db"), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent), // Silence the logger
 	})
 
@@ -20,7 +20,7 @@ func ConnectDatabase() {
 	}
 
 	// Migrate the models to the database
-	err = database.AutoMigrate(&User{})
+	err = database.AutoMigrate(&Rom{}, &User{})
 	if err != nil {
 		return
 	}

@@ -15,6 +15,7 @@ func SetupRouter() {
 	public.GET("/", Home)
 	public.POST("/register", Register)
 	public.POST("/login", Login)
+	public.GET("/roms", GetAllRoms)
 
 	protected.GET("/user", CurrentUser)
 
