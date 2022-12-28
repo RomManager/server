@@ -20,7 +20,7 @@ func ConnectDatabase() {
 	}
 
 	// Migrate the models to the database
-	err = database.AutoMigrate(&Book{}, &User{})
+	err = database.AutoMigrate(&User{})
 	if err != nil {
 		return
 	}

@@ -13,8 +13,6 @@ func SetupRouter() {
 	protected.Use(middlewares.JwtAuthMiddleware())
 
 	public.GET("/", Home)
-	public.GET("/books", FindBooks)
-	public.POST("/books", CreateBook)
 	public.POST("/register", Register)
 	public.POST("/login", Login)
 
