@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"log"
 	"strings"
 	"sync"
@@ -72,8 +71,6 @@ func Config() ServerConfig {
 	configOnce.Do(func() {
 		serverConfig = ConfigBuilder().Build()
 	})
-
-	fmt.Printf("Loaded config with SteamGridDBEnabled: %v\n", serverConfig.GridAPIEnabled)
 
 	return serverConfig
 }

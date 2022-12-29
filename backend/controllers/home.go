@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/vallezw/RomManager/backend/roms"
+	"github.com/vallezw/RomManager/backend/gridapi"
 )
 
 func Home(c *gin.Context) {
@@ -12,6 +12,6 @@ func Home(c *gin.Context) {
 }
 
 func RunMethod(c *gin.Context) {
-	roms.SetupDirectories()
+	gridapi.SetupGridAPI()
 	c.JSON(http.StatusOK, gin.H{"data": "I ran the method"})
 }
