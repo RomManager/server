@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"log"
 	"strings"
 	"sync"
@@ -53,13 +54,27 @@ func (b configBuilder) Build() ServerConfig {
 	if err != nil {
 		log.Fatalf("error loading config from environment: %s", err.Error())
 	}
+
+	serverConfig.postConfigSetup()
+
 	return serverConfig
+}
+
+// Setup PostConfigEnv which have logic in them eg. SteamAPIEnabled = ?
+func (s *ServerConfig) postConfigSetup() {
+	// Check if there is an API key given --> set bool
+	s.GridAPIEnabled = s.SteamGridDBAPIKey != ""
+
+	// TODO: Make the datapath check in here
 }
 
 func Config() ServerConfig {
 	configOnce.Do(func() {
 		serverConfig = ConfigBuilder().Build()
 	})
+
+	fmt.Printf("Loaded config with SteamGridDBEnabled: %v\n", serverConfig.GridAPIEnabled)
+
 	return serverConfig
 }
 
@@ -69,13 +84,18 @@ type ServerConfig struct {
 	TokenLifespan string `env:"JWT_TOKEN_LIFESPAN"` // Is given in hours
 
 	DataPath string `env:"DATA_PATH"` // Has to end with a "/" for now
+
+	SteamGridDBAPIKey string `env:"STEAMGRIDDB_API_KEY"`
+	GridAPIEnabled    bool
 }
 
 // Bootstrap the applicatoin config struct with the default config
 func NewConfig() ServerConfig {
 	return ServerConfig{
-		ApiSecret:     "yourapikey",
-		TokenLifespan: "10",
-		DataPath:      "data/",
+		ApiSecret:         "yourapikey",
+		TokenLifespan:     "10",
+		DataPath:          "data/",
+		SteamGridDBAPIKey: "",
+		GridAPIEnabled:    false,
 	}
 }
