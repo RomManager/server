@@ -15,6 +15,9 @@ func SearchForGame(gameName string) (GameResponse, error) {
 
 	UnmarshalData(resp, dataRes)
 
-	fmt.Println(dataRes.GameArray[0])
+	if len(dataRes.GameArray) == 0 {
+		return GameResponse{}, nil
+	}
+
 	return dataRes.GameArray[0], nil
 }

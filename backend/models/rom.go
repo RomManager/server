@@ -1,12 +1,17 @@
 package models
 
-import "errors"
+import (
+	"errors"
+	"time"
+)
 
 type Rom struct {
-	ID       uint32 `gorm:"primary_key;auto_increment" json:"id"`
-	Name     string `json:"name"`
-	Filepath string `gorm:"unique" json:"filepath"`
-	Emulator string `json:"emulator"` // Given emulator as emulator ID (Foldername)
+	ID            uint32    `gorm:"primary_key;auto_increment" json:"id"`
+	Name          string    `json:"name"`
+	Filepath      string    `gorm:"unique" json:"filepath"`
+	Emulator      string    `json:"emulator"`       // Given emulator as emulator ID (Foldername)
+	SteamGridDBID int       `json:"steamgriddb_id"` // If 0 no steamgrid connection
+	ReleaseDate   time.Time `json:"release_date"`   // When not known its a 0 timestamp
 }
 
 func (r *Rom) SaveRom() (*Rom, error) {

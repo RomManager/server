@@ -4,9 +4,12 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
+	"time"
 
 	"github.com/fatih/color"
 	"github.com/vallezw/RomManager/backend/config"
+	"github.com/vallezw/RomManager/backend/gridapi"
 	"github.com/vallezw/RomManager/backend/models"
 	"github.com/vallezw/RomManager/backend/utils"
 )
@@ -23,7 +26,7 @@ func SetupDirectories() {
 	color.Blue("All emulator folders are present in data/roms")
 }
 
-// TODO: Write method for missing files
+// TODO: Write method for check if files are missing
 func SyncRomFiles() {
 
 	dataPath := config.Config().DataPath
@@ -55,13 +58,30 @@ func walkThroughDir(path string, emulator Emulator) {
 		}
 
 		c.Printf("Found '%s' --- Checking for DB entry --- ", info.Name())
-
-		// Check if a rom with the filepath already exists
+		// Check if a rom with the filepath already exists; if not -> Save to roms db
 		if !models.CheckRomExistsByFilepath(path) {
+			// searchedForName is either just cropped or a found result by the API
+			game, croppedName := makeAPISearchCall(info.Name())
+			steamGridDBID := 0
+			searchedForName := croppedName
+			var releaseDate time.Time
+			if croppedName == "" {
+				c.Printf("Found game: %v in SteamGridDB API\n", game.Name)
+
+				steamGridDBID = game.ID
+				searchedForName = game.Name
+				fmt.Printf("This is the releaseDate value %v\n", game.ReleaseDate)
+				if game.ReleaseDate != 0 {
+					releaseDate = time.Unix(game.ReleaseDate, 0)
+				}
+			}
+
 			rom := models.Rom{
-				Name:     info.Name(), // TODO: Make api call or something to get proper name
-				Filepath: path,
-				Emulator: emulator.FolderName,
+				Name:          searchedForName,
+				Filepath:      path,
+				Emulator:      emulator.FolderName,
+				SteamGridDBID: steamGridDBID,
+				ReleaseDate:   releaseDate,
 			}
 			rom.SaveRom()
 			c.Printf("Didn't find in DB --- Created a new entry --- Continuing...\n")
@@ -71,4 +91,20 @@ func walkThroughDir(path string, emulator Emulator) {
 		c.Printf("Found in DB --- Continuing...\n")
 		return nil
 	})
+}
+
+/*
+Takes the file name -> crops it by . (e.g. .txt) ->
+searches api -> if found returns found game and empty string if not returns empty game and cropped name
+*/
+func makeAPISearchCall(filename string) (gridapi.GameResponse, string) {
+	croppedName := strings.Split(filename, ".")[-0]
+
+	game, _ := gridapi.SearchForGame(croppedName)
+	// No game found or err
+	if (game == gridapi.GameResponse{}) {
+		return gridapi.GameResponse{}, croppedName
+	}
+
+	return game, ""
 }

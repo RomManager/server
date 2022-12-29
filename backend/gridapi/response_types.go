@@ -3,7 +3,7 @@ package gridapi
 type GameResponse struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
-	ReleaseDate string `json:"release_date"`
+	ReleaseDate int64  `json:"release_date"` // Given as UNIX timestamp
 	// types       []string
 	// verified    bool
 }

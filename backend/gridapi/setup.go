@@ -39,6 +39,7 @@ func UnmarshalData(resp *http.Response, target interface{}) error {
 
 	if err := json.Unmarshal(body, &target); err != nil { // Parse []byte to go struct pointer
 		fmt.Println("Can not unmarshal JSON")
+		fmt.Println(err.Error())
 		return err
 	}
 	return nil
@@ -59,7 +60,7 @@ func SetupGridAPI() {
 
 // Check if you can connect to the API
 func healthCheck() error {
-	// Make a test on Mario Sunshine
+	// Make a test on Super Mario Sunshine
 	resp, err := client.Get("/games/id/34899")
 	if err != nil {
 		fmt.Println(err)
