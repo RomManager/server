@@ -4,7 +4,7 @@ The backend is written in go with gin and gorm
 
 `cd backend`
 
-`go run main.go`
+`go run *.go`
 
 To run it with live reloading use [air](https://github.com/cosmtrek/air)
 

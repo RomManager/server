@@ -12,6 +12,6 @@ func Home(c *gin.Context) {
 }
 
 func RunMethod(c *gin.Context) {
-	gridapi.SetupGridAPI()
+	gridapi.SearchForGame("Mario Sunshine")
 	c.JSON(http.StatusOK, gin.H{"data": "I ran the method"})
 }

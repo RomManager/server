@@ -2,6 +2,7 @@ package gridapi
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -31,28 +32,16 @@ func (c *httpClient) Get(url string) (resp *http.Response, err error) {
 	return c.c.Do(req)
 }
 
-/*
-Example:
+// Unmarshal the data into the structs/types given in response_types.go
+func UnmarshalData(resp *http.Response, target interface{}) error {
+	defer resp.Body.Close()
+	body, _ := io.ReadAll(resp.Body)
 
-	{
-		"id": 34899,
-		"name": "Super Mario Sunshine",
-		"release_date": null,
-		"types": [],
-		"verified": true
+	if err := json.Unmarshal(body, &target); err != nil { // Parse []byte to go struct pointer
+		fmt.Println("Can not unmarshal JSON")
+		return err
 	}
-*/
-type GameResponse struct {
-	ID          int `json:"id"`
-	Name        string
-	ReleaseDate string
-	// types       []string
-	// verified    bool
-}
-
-type DataResponse struct {
-	Success bool         `json:"success"`
-	Data    GameResponse `json:"data"`
+	return nil
 }
 
 func SetupGridAPI() {
@@ -61,26 +50,27 @@ func SetupGridAPI() {
 		apiToken: config.Config().SteamGridDBAPIKey,
 	}
 
-	// Health check
+	err := healthCheck()
+	if err != nil {
+		// TODO: Make a fix that it sets GridAPIEnabled to false in Config
+		return
+	}
+}
 
+// Check if you can connect to the API
+func healthCheck() error {
+	// Make a test on Mario Sunshine
 	resp, err := client.Get("/games/id/34899")
 	if err != nil {
 		fmt.Println(err)
-		return
+		return err
 	}
 
-	defer resp.Body.Close()
-	body, _ := io.ReadAll(resp.Body)
-
-	if resp.StatusCode == 200 {
-		color.Green("Connection with SteamGridDB API has been successful")
+	if resp.StatusCode != 200 {
+		color.Red("Problem connecting with the SteamGridDB database, please check your given API key")
+		return errors.New("problem connecting with the SteamGridDB database, please check your given API key")
 	}
 
-	var dataresponse DataResponse
-
-	json.NewDecoder(resp.Body).Decode(&dataresponse)
-
-	fmt.Println(dataresponse)
-
-	fmt.Println(string(body))
+	color.Green("Connection with SteamGridDB API has been successful")
+	return nil
 }
