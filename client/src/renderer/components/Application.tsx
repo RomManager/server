@@ -2,6 +2,7 @@ import React from "react";
 import logo from "@assets/icons/electron-logo.png";
 
 const Application: React.FC = () => {
+  const test = "test";
   return (
     <div>
       <h1>Welcome to the RM Client</h1>
