@@ -1,16 +1,4 @@
 # RomManager
-## Backend
-The backend is written in go with gin and gorm
+[backend/](https://github.com/vallezw/RomManager/tree/main/backend)
 
-`cd backend`
-
-`go run *.go`
-
-To run it with live reloading use [air](https://github.com/cosmtrek/air)
-
-`air`
-
-
-For the Images and game information we use the [SteamGridDB Api](https://www.steamgriddb.com/api/v2). Create a key and set it in the `.env`
-
-`STEAMGRIDDBAPIKEY="yourapikey"`
+[client/](https://github.com/vallezw/RomManager/tree/main/client)

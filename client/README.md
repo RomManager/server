@@ -1,5 +1,5 @@
-# Client
-## Code style conventions
+## Client
+### Code style conventions
 -- to be improved --
 
 File names: camelCase
