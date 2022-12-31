@@ -1,7 +1,7 @@
 /*
-  * Configuration for the Titlebar
-  * Not implemented yet
-*/
+ * Configuration for the Titlebar
+ * Not implemented yet
+ */
 
 export type TitlebarMenuItem = {
   name: string;
@@ -18,128 +18,128 @@ export type TitlebarMenu = {
 
 const titlebarMenus: TitlebarMenu[] = [
   {
-    name: 'File',
+    name: "File",
     items: [
       {
-        name: 'Exit',
-        action: 'exit',
+        name: "Exit",
+        action: "exit",
       },
     ],
   },
   {
-    name: 'Edit',
+    name: "Edit",
     items: [
       {
-        name: 'Undo',
-        action: 'undo',
-        shortcut: 'Ctrl+Z',
+        name: "Undo",
+        action: "undo",
+        shortcut: "Ctrl+Z",
       },
       {
-        name: 'Redo',
-        action: 'redo',
-        shortcut: 'Ctrl+Y',
+        name: "Redo",
+        action: "redo",
+        shortcut: "Ctrl+Y",
       },
       {
-        name: '__',
+        name: "__",
       },
       {
-        name: 'Cut',
-        action: 'cut',
-        shortcut: 'Ctrl+X',
+        name: "Cut",
+        action: "cut",
+        shortcut: "Ctrl+X",
       },
       {
-        name: 'Copy',
-        action: 'copy',
-        shortcut: 'Ctrl+C',
+        name: "Copy",
+        action: "copy",
+        shortcut: "Ctrl+C",
       },
       {
-        name: 'Paste',
-        action: 'paste',
-        shortcut: 'Ctrl+V',
+        name: "Paste",
+        action: "paste",
+        shortcut: "Ctrl+V",
       },
       {
-        name: 'Delete',
-        action: 'delete',
+        name: "Delete",
+        action: "delete",
       },
       {
-        name: '__',
+        name: "__",
       },
       {
-        name: 'Select All',
-        action: 'select_all',
-        shortcut: 'Ctrl+A',
+        name: "Select All",
+        action: "select_all",
+        shortcut: "Ctrl+A",
       },
     ],
   },
   {
-    name: 'View',
+    name: "View",
     items: [
       {
-        name: 'Reload',
-        action: 'reload',
-        shortcut: 'Ctrl+R',
+        name: "Reload",
+        action: "reload",
+        shortcut: "Ctrl+R",
       },
       {
-        name: 'Force Reload',
-        action: 'force_reload',
-        shortcut: 'Ctrl+Shift+R',
+        name: "Force Reload",
+        action: "force_reload",
+        shortcut: "Ctrl+Shift+R",
       },
       {
-        name: 'Toogle Developer Tools',
-        action: 'toggle_devtools',
-        shortcut: 'Ctrl+Shift+I',
+        name: "Toogle Developer Tools",
+        action: "toggle_devtools",
+        shortcut: "Ctrl+Shift+I",
       },
       {
-        name: '__',
+        name: "__",
       },
       {
-        name: 'Actual Size',
-        action: 'actual_size',
-        shortcut: 'Ctrl+0',
+        name: "Actual Size",
+        action: "actual_size",
+        shortcut: "Ctrl+0",
       },
       {
-        name: 'Zoom In',
-        action: 'zoom_in',
-        shortcut: 'Ctrl++',
+        name: "Zoom In",
+        action: "zoom_in",
+        shortcut: "Ctrl++",
       },
       {
-        name: 'Zoom Out',
-        action: 'zoom_out',
-        shortcut: 'Ctrl+-',
+        name: "Zoom Out",
+        action: "zoom_out",
+        shortcut: "Ctrl+-",
       },
       {
-        name: '__',
+        name: "__",
       },
       {
-        name: 'Toggle Fullscreen',
-        action: 'toggle_fullscreen',
-        shortcut: 'F11',
+        name: "Toggle Fullscreen",
+        action: "toggle_fullscreen",
+        shortcut: "F11",
       },
     ],
   },
   {
-    name: 'Window',
+    name: "Window",
     items: [
       {
-        name: 'Minimize',
-        action: 'minimize',
-        shortcut: 'Ctrl+M',
+        name: "Minimize",
+        action: "minimize",
+        shortcut: "Ctrl+M",
       },
       {
-        name: 'Close',
-        action: 'exit',
-        shortcut: 'Ctrl+W',
+        name: "Close",
+        action: "exit",
+        shortcut: "Ctrl+W",
       },
     ],
   },
   {
-    name: 'Author',
+    name: "Author",
     items: [
       {
-        name: 'Valentin Zwerschke',
-        action: 'open_url',
-        value: 'https://github.com/vallezw',
-        shortcut: '@vallezw',
+        name: "Valentin Zwerschke",
+        action: "open_url",
+        value: "https://github.com/vallezw",
+        shortcut: "@vallezw",
       },
     ],
   },

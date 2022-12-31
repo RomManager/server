@@ -1,5 +1,7 @@
 ## Client
+
 ### Code style conventions
+
 -- to be improved --
 
 File names: camelCase
@@ -9,6 +11,7 @@ React components: PascalCase
 folders mostly camal but with only react components pascal case?
 
 For comments use TSDoc:
+
 ```
 export class Statistics {
   /**
