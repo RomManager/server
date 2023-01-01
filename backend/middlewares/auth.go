@@ -4,9 +4,9 @@ import (
 	"errors"
 	"net/http"
 
+	"github.com/RomManager/server/backend/utils"
+	"github.com/RomManager/server/backend/utils/token"
 	"github.com/gin-gonic/gin"
-	"github.com/vallezw/RomManager/backend/utils"
-	"github.com/vallezw/RomManager/backend/utils/token"
 )
 
 func JwtAuthMiddleware() gin.HandlerFunc {

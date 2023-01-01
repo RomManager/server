@@ -6,9 +6,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/RomManager/server/backend/config"
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	"github.com/vallezw/RomManager/backend/config"
 )
 
 func GenerateToken(user_id uint32) (string, error) {

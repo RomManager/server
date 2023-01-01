@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 
-	"github.com/vallezw/RomManager/backend/config"
-	"github.com/vallezw/RomManager/backend/controllers"
-	"github.com/vallezw/RomManager/backend/gridapi"
-	"github.com/vallezw/RomManager/backend/models"
-	"github.com/vallezw/RomManager/backend/roms"
+	"github.com/RomManager/server/backend/config"
+	"github.com/RomManager/server/backend/controllers"
+	"github.com/RomManager/server/backend/gridapi"
+	"github.com/RomManager/server/backend/models"
+	"github.com/RomManager/server/backend/roms"
 )
 
 func RunServer() {

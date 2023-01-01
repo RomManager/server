@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/RomManager/server/backend/models"
+	"github.com/RomManager/server/backend/utils"
 	"github.com/gin-gonic/gin"
-	"github.com/vallezw/RomManager/backend/models"
-	"github.com/vallezw/RomManager/backend/utils"
 )
 
 func GetAllRoms(c *gin.Context) {

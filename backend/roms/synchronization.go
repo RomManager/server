@@ -7,11 +7,11 @@ import (
 	"strings"
 	"time"
 
+	"github.com/RomManager/server/backend/config"
+	"github.com/RomManager/server/backend/gridapi"
+	"github.com/RomManager/server/backend/models"
+	"github.com/RomManager/server/backend/utils"
 	"github.com/fatih/color"
-	"github.com/vallezw/RomManager/backend/config"
-	"github.com/vallezw/RomManager/backend/gridapi"
-	"github.com/vallezw/RomManager/backend/models"
-	"github.com/vallezw/RomManager/backend/utils"
 )
 
 func SetupDirectories() {

@@ -1,8 +1,8 @@
 package controllers
 
 import (
+	"github.com/RomManager/server/backend/middlewares"
 	"github.com/gin-gonic/gin"
-	"github.com/vallezw/RomManager/backend/middlewares"
 )
 
 func SetupRouter() {

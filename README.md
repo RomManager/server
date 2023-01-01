@@ -1,11 +1,2 @@
-# RomManager
-[backend/](https://github.com/vallezw/RomManager/tree/main/backend)
-
-[client/](https://github.com/vallezw/RomManager/tree/main/client)
-
-To use pre commit prettier check etc:
-
-```
-npm i
-npm run prepare
-```
+# server
+Will be using [go.rice](https://github.com/GeertJohan/go.rice) to connect web-client and go server

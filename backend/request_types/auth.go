@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/vallezw/RomManager/backend/utils"
+	"github.com/RomManager/server/backend/utils"
 )
 
 type LoginRequest struct {

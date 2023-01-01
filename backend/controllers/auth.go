@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/RomManager/server/backend/models"
+	"github.com/RomManager/server/backend/request_types"
+	"github.com/RomManager/server/backend/utils"
+	"github.com/RomManager/server/backend/utils/token"
 	"github.com/gin-gonic/gin"
-	"github.com/vallezw/RomManager/backend/models"
-	"github.com/vallezw/RomManager/backend/request_types"
-	"github.com/vallezw/RomManager/backend/utils"
-	"github.com/vallezw/RomManager/backend/utils/token"
 )
 
 func Login(c *gin.Context) {

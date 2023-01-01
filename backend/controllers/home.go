@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 
+	"github.com/RomManager/server/backend/gridapi"
 	"github.com/gin-gonic/gin"
-	"github.com/vallezw/RomManager/backend/gridapi"
 )
 
 func Home(c *gin.Context) {

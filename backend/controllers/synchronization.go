@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 
+	"github.com/RomManager/server/backend/roms"
 	"github.com/gin-gonic/gin"
-	"github.com/vallezw/RomManager/backend/roms"
 )
 
 func Sync(c *gin.Context) {

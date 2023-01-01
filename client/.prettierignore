@@ -1,5 +1,0 @@
-# Ignore artifacts:
-.webpack/
-node_modules/
-build
-coverage

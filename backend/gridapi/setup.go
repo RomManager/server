@@ -7,8 +7,8 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/RomManager/server/backend/config"
 	"github.com/fatih/color"
-	"github.com/vallezw/RomManager/backend/config"
 )
 
 var client httpClient
