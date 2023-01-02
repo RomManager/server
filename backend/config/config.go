@@ -84,6 +84,8 @@ type ServerConfig struct {
 
 	SteamGridDBAPIKey string `env:"STEAMGRIDDB_API_KEY"`
 	GridAPIEnabled    bool
+
+	DebugEnabled bool `env:"DEBUG"`
 }
 
 // Bootstrap the applicatoin config struct with the default config
@@ -94,5 +96,6 @@ func NewConfig() ServerConfig {
 		DataPath:          "data/",
 		SteamGridDBAPIKey: "",
 		GridAPIEnabled:    false,
+		DebugEnabled:      false,
 	}
 }
