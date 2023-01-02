@@ -1,11 +1,21 @@
 package controllers
 
 import (
+	"fmt"
+
+	"github.com/RomManager/server/backend/config"
 	"github.com/RomManager/server/backend/middlewares"
 	"github.com/gin-gonic/gin"
 )
 
 func SetupRouter() {
+	if !config.Config().DebugEnabled {
+		fmt.Println("Running server in production mode...")
+		gin.SetMode(gin.ReleaseMode)
+	} else {
+		fmt.Println("Running server in debug mode...")
+	}
+
 	r := gin.Default()
 
 	public := r.Group("/api")
