@@ -12,6 +12,7 @@ type Rom struct {
 	Emulator      string    `json:"emulator"`       // Given emulator as emulator ID (Foldername)
 	SteamGridDBID int       `json:"steamgriddb_id"` // If 0 no steamgrid connection
 	ReleaseDate   time.Time `json:"release_date"`   // When not known its a 0 timestamp
+	GridURL       string    `json:"grid_url"`
 }
 
 func (r *Rom) SaveRom() (*Rom, error) {

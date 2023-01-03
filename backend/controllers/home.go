@@ -12,6 +12,6 @@ func Home(c *gin.Context) {
 }
 
 func RunMethod(c *gin.Context) {
-	gridapi.SearchForGame("Celeste")
-	c.JSON(http.StatusOK, gin.H{"data": "I ran the method"})
+	grid, _ := gridapi.GetGameGrid(34899)
+	c.JSON(http.StatusOK, gin.H{"data": grid})
 }

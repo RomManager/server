@@ -1,10 +1,12 @@
 package gridapi
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 // Uses SteamGridDB to search for a game
 func SearchForGame(gameName string) (GameResponse, error) {
-	// Make a test on Mario Sunshine
 	resp, err := client.Get("/search/autocomplete/" + gameName)
 	if err != nil {
 		fmt.Println(err)
@@ -20,4 +22,23 @@ func SearchForGame(gameName string) (GameResponse, error) {
 	}
 
 	return dataRes.GameArray[0], nil
+}
+
+// Search for a thumbnail of the given game via the game ID
+func GetGameGrid(gameID int) (GridResponse, error) {
+	resp, err := client.Get("/grids/game/" + strconv.Itoa(gameID))
+	if err != nil {
+		fmt.Println(err)
+		return GridResponse{}, err
+	}
+
+	dataRes := new(ArrayGridResponse)
+
+	UnmarshalData(resp, dataRes)
+
+	if len(dataRes.GridArray) == 0 {
+		return GridResponse{}, nil
+	}
+
+	return dataRes.GridArray[0], nil
 }
