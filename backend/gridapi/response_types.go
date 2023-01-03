@@ -18,3 +18,15 @@ type ArrayDataResponse struct {
 	Success   bool           `json:"success"`
 	GameArray []GameResponse `json:"data"`
 }
+
+// For the Grids of the Games
+type GridResponse struct {
+	ID  int    `json:"id"`
+	URL string `jsong:"url"`
+}
+
+// For an array of grids response
+type ArrayGridResponse struct {
+	Success   bool           `json:"success"`
+	GridArray []GridResponse `json:"data"`
+}
