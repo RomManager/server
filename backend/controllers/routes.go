@@ -6,6 +6,7 @@ import (
 	"github.com/RomManager/server/backend/config"
 	"github.com/RomManager/server/backend/middlewares"
 	"github.com/gin-gonic/gin"
+	cors "github.com/rs/cors/wrapper/gin"
 )
 
 func SetupRouter() {
@@ -17,6 +18,11 @@ func SetupRouter() {
 	}
 
 	r := gin.Default()
+
+	if config.Config().DebugEnabled {
+		// Use CORS when debug is enabled
+		r.Use(cors.Default())
+	}
 
 	public := r.Group("/api")
 	protected := r.Group("/api")

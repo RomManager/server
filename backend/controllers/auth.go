@@ -32,7 +32,7 @@ func Login(c *gin.Context) {
 	token, err := models.LoginCheck(u.Email, u.Password)
 
 	if err != nil {
-		utils.DoError(c, http.StatusBadRequest, errors.New("email or password is incorrect"))
+		utils.DoError(c, http.StatusUnauthorized, errors.New("email or password is incorrect"))
 		return
 	}
 
