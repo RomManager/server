@@ -37,7 +37,7 @@ func GetRom(c *gin.Context) {
 }
 
 /*
- * Serve grid files
+ * Serve rom file
  * /rom/:id/file
  */
 func GetRomFile(c *gin.Context) {
@@ -54,4 +54,24 @@ func GetRomFile(c *gin.Context) {
 	}
 
 	c.File(rom.Filepath)
+}
+
+/*
+ * Serve grid files
+ * /rom/:id/grid
+ */
+func GetGridFile(c *gin.Context) {
+	romID, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		utils.DoError(c, http.StatusBadRequest, err)
+		return
+	}
+
+	rom, err := models.GetRomByID(uint(romID))
+	if err != nil {
+		utils.DoError(c, http.StatusNotFound, err)
+		return
+	}
+
+	c.File(rom.GridFilepath)
 }

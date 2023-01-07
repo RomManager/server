@@ -42,9 +42,13 @@ func SetupRouter() {
 	public.GET("/roms", GetAllRoms)
 	public.GET("/rom/:id", GetRom)
 	public.GET("/rom/:id/file", GetRomFile)
+	public.GET("/rom/:id/grid", GetGridFile)
 
 	// Synchronization
 	public.GET("/sync", Sync)
+
+	// Static files
+	// public.Static("/files", config.Config().DataPath)
 
 	runServer(r)
 }
