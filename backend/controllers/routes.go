@@ -41,6 +41,7 @@ func SetupRouter() {
 	// Roms
 	public.GET("/roms", GetAllRoms)
 	public.GET("/rom/:id", GetRom)
+	public.GET("/rom/:id/file", GetRomFile)
 
 	// Synchronization
 	public.GET("/sync", Sync)

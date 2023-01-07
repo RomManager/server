@@ -76,14 +76,14 @@ func createRom(c *color.Color, path string, filename string, emulator string) mo
 	game, grid, croppedName := makeAPISearchCall(filename)
 	steamGridDBID := 0
 	searchedForName := croppedName
-	gridURL := ""
+	gridFilepath := ""
 	var releaseDate time.Time
 	if croppedName == "" {
 		c.Printf("Found game: %v in SteamGridDB API\n", game.Name)
-
 		steamGridDBID = game.ID
 		searchedForName = game.Name
-		gridURL = grid.URL
+		// Download and safe the grid img locally
+		gridFilepath = DownloadGridImg(grid.URL, emulator, filename)
 		if game.ReleaseDate != 0 {
 			releaseDate = time.Unix(game.ReleaseDate, 0)
 		}
@@ -95,9 +95,25 @@ func createRom(c *color.Color, path string, filename string, emulator string) mo
 		Emulator:      emulator,
 		SteamGridDBID: steamGridDBID,
 		ReleaseDate:   releaseDate,
-		GridURL:       gridURL,
+		GridFilepath:  gridFilepath,
 	}
 	return rom
+}
+
+/*
+* Donwloads the grid img locally, so the server can serve it
+* File will be saved like this e.g. "Super Mario Sunshine.img"
+ */
+func DownloadGridImg(gridURL string, emulator string, origFilepath string) string {
+	//croppedName := strings.Split(filepath, ".")[-0]
+	downloadFileExtSlice := strings.Split(gridURL, ".")
+	downloadFileExt := downloadFileExtSlice[len(downloadFileExtSlice)-1] // Get extension
+
+	origFilepathCropped := strings.Split(origFilepath, ".")[-0]
+
+	filepath := config.Config().DataPath + emulator + "/" + origFilepathCropped + "." + downloadFileExt
+	utils.DownloadFileToPath(gridURL, filepath)
+	return filepath
 }
 
 /*
