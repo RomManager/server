@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/RomManager/server/backend/gridapi"
+	"github.com/RomManager/server/backend/roms"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,6 +12,6 @@ func Home(c *gin.Context) {
 }
 
 func RunMethod(c *gin.Context) {
-	grid, _ := gridapi.GetGameGrid(34899)
-	c.JSON(http.StatusOK, gin.H{"data": grid})
+	roms.DownloadGridImg("https://cdn2.steamgriddb.com/file/sgdb-cdn/grid/3eed6d27b0b2dd008c1be88cce8245fc.png", "nds", "")
+	c.JSON(http.StatusOK, gin.H{"data": "te"})
 }
