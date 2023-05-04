@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 
-	"github.com/RomManager/server/backend/config"
-	"github.com/RomManager/server/backend/controllers"
-	"github.com/RomManager/server/backend/gridapi"
-	"github.com/RomManager/server/backend/models"
-	"github.com/RomManager/server/backend/roms"
+	"github.com/RomManager/server/config"
+	"github.com/RomManager/server/controllers"
+	"github.com/RomManager/server/gridapi"
+	"github.com/RomManager/server/models"
+	"github.com/RomManager/server/roms"
 )
 
 func main() {

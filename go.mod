@@ -1,4 +1,4 @@
-module github.com/RomManager/server/backend
+module github.com/RomManager/server
 
 go 1.19
 

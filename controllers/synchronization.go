@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/RomManager/server/backend/roms"
+	"github.com/RomManager/server/roms"
 	"github.com/gin-gonic/gin"
 )
 

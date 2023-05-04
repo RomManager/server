@@ -7,7 +7,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/RomManager/server/backend/config"
+	"github.com/RomManager/server/config"
 	"github.com/fatih/color"
 )
 

@@ -3,8 +3,8 @@ package controllers
 import (
 	"fmt"
 
-	"github.com/RomManager/server/backend/config"
-	"github.com/RomManager/server/backend/middlewares"
+	"github.com/RomManager/server/config"
+	"github.com/RomManager/server/middlewares"
 	"github.com/gin-gonic/gin"
 )
 
