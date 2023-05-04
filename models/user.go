@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/RomManager/server/backend/utils/token"
+	"github.com/RomManager/server/utils/token"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )

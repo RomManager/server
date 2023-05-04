@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/RomManager/server/backend/config"
+	"github.com/RomManager/server/config"
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 )

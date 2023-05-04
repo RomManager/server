@@ -8,7 +8,7 @@ RUN go mod download
 COPY ./ ./
 
 # todo add tests
-# RUN CGO_ENABLED=1 go test -timeout 30s -v github.com/RomManager/server/backend/tests
+# RUN CGO_ENABLED=1 go test -timeout 30s -v github.com/RomManager/server/tests
 
 RUN mkdir /app
 RUN CGO_ENABLED=1 go build \

@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/RomManager/server/backend/models"
-	"github.com/RomManager/server/backend/utils"
+	"github.com/RomManager/server/models"
+	"github.com/RomManager/server/utils"
 	"github.com/gin-gonic/gin"
 )
 

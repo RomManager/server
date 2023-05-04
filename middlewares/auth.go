@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/RomManager/server/backend/utils"
-	"github.com/RomManager/server/backend/utils/token"
+	"github.com/RomManager/server/utils"
+	"github.com/RomManager/server/utils/token"
 	"github.com/gin-gonic/gin"
 )
 

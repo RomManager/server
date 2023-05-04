@@ -7,10 +7,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/RomManager/server/backend/config"
-	"github.com/RomManager/server/backend/gridapi"
-	"github.com/RomManager/server/backend/models"
-	"github.com/RomManager/server/backend/utils"
+	"github.com/RomManager/server/config"
+	"github.com/RomManager/server/gridapi"
+	"github.com/RomManager/server/models"
+	"github.com/RomManager/server/utils"
 	"github.com/fatih/color"
 )
 
