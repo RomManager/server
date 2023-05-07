@@ -8,7 +8,11 @@ import (
 )
 
 func Sync(c *gin.Context) {
-	roms.SyncRomFiles()
+	err := roms.SyncRomFiles()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Error while syncing"})
+		return
+	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "Started syncing..."})
 }

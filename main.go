@@ -11,10 +11,6 @@ import (
 )
 
 func main() {
-	RunServer()
-}
-
-func RunServer() {
 	fmt.Println("Welcome to the RomManager server")
 	fmt.Printf("Loaded config with SteamGridDBEnabled: %v\n", config.Config().GridAPIEnabled)
 
