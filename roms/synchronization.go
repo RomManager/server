@@ -27,8 +27,7 @@ func SetupDirectories() {
 }
 
 // TODO: Write method for check if files are missing
-func SyncRomFiles() {
-
+func SyncRomFiles() error {
 	dataPath := config.Config().DataPath
 
 	if config.Config().DataPath == "data/" {
@@ -40,13 +39,18 @@ func SyncRomFiles() {
 	// Iterate through the each emulator folder
 	for _, emulator := range EmulatorList {
 		emulatorPath := dataPath + emulator.FolderName
-		walkThroughDir(emulatorPath, emulator)
+		err := walkThroughDir(emulatorPath, emulator)
+		if err != nil {
+			fmt.Println(err.Error())
+			return err
+		}
 	}
+	return nil
 }
 
 // TODO: Make log process a bit cleaner
-func walkThroughDir(path string, emulator Emulator) {
-	filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
+func walkThroughDir(path string, emulator Emulator) error {
+	err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
 		c := color.New(color.FgCyan)
 		if err != nil {
 			fmt.Println(err.Error())
@@ -61,7 +65,11 @@ func walkThroughDir(path string, emulator Emulator) {
 		// Check if a rom with the filepath already exists; if not -> Save to roms db
 		if !models.CheckRomExistsByFilepath(path) {
 			rom := createRom(c, path, info.Name(), emulator.FolderName)
-			rom.SaveRom()
+			_, err := rom.SaveRom()
+			if err != nil {
+				fmt.Println(err.Error())
+				return err
+			}
 			c.Printf("Didn't find in DB --- Created a new entry --- Continuing...\n")
 			return nil
 		}
@@ -69,6 +77,7 @@ func walkThroughDir(path string, emulator Emulator) {
 		c.Printf("Found in DB --- Continuing...\n")
 		return nil
 	})
+	return err
 }
 
 func createRom(c *color.Color, path string, filename string, emulator string) models.Rom {

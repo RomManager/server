@@ -15,7 +15,10 @@ func SearchForGame(gameName string) (GameResponse, error) {
 
 	dataRes := new(ArrayDataResponse)
 
-	UnmarshalData(resp, dataRes)
+	err = UnmarshalData(resp, dataRes)
+	if err != nil {
+		return GameResponse{}, err
+	}
 
 	if len(dataRes.GameArray) == 0 {
 		return GameResponse{}, nil
@@ -34,7 +37,10 @@ func GetGameGrid(gameID int) (GridResponse, error) {
 
 	dataRes := new(ArrayGridResponse)
 
-	UnmarshalData(resp, dataRes)
+	err = UnmarshalData(resp, dataRes)
+	if err != nil {
+		return GridResponse{}, err
+	}
 
 	if len(dataRes.GridArray) == 0 {
 		return GridResponse{}, nil

@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRouter() {
+func SetupRouter() error {
 	if !config.Config().DebugEnabled {
 		fmt.Println("Running server in production mode...")
 		gin.SetMode(gin.ReleaseMode)
@@ -50,9 +50,13 @@ func SetupRouter() {
 	// Static files
 	// public.Static("/files", config.Config().DataPath)
 
-	runServer(r)
+	return runServer(r)
 }
 
-func runServer(router *gin.Engine) {
-	router.Run(":8080")
+func runServer(router *gin.Engine) error {
+	err := router.Run(":8080")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	return err
 }
