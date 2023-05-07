@@ -11,13 +11,6 @@ import (
 )
 
 func main() {
-	err := RunServer()
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-}
-
-func RunServer() error {
 	fmt.Println("Welcome to the RomManager server")
 	fmt.Printf("Loaded config with SteamGridDBEnabled: %v\n", config.Config().GridAPIEnabled)
 
@@ -29,6 +22,5 @@ func RunServer() error {
 
 	// Connect to DB and setup router
 	models.ConnectDatabase()
-	err := controllers.SetupRouter()
-	return err
+	controllers.SetupRouter()
 }

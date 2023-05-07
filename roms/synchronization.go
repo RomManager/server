@@ -50,7 +50,7 @@ func SyncRomFiles() error {
 
 // TODO: Make log process a bit cleaner
 func walkThroughDir(path string, emulator Emulator) error {
-	err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
+	return filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
 		c := color.New(color.FgCyan)
 		if err != nil {
 			fmt.Println(err.Error())
@@ -77,7 +77,6 @@ func walkThroughDir(path string, emulator Emulator) error {
 		c.Printf("Found in DB --- Continuing...\n")
 		return nil
 	})
-	return err
 }
 
 func createRom(c *color.Color, path string, filename string, emulator string) models.Rom {
